@@ -62,46 +62,15 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // set preview size and make any resize, rotate or
         // reformatting changes here
         
-	    Parameters parameters = mCamera.getParameters();
-	    if (parameters == null) 
-	    {
-	      return;
-	    }
 	    
-	    
-	    
-	    List<String> flashModes = parameters.getSupportedFlashModes();
-	    // Check if camera flash exists
-	    if (flashModes == null) 
-	    {
-	      return;
-	    }
-	    
-	    String flashMode = parameters.getFlashMode();
-	    
-	    if ( ! Parameters.FLASH_MODE_TORCH.equals(flashMode))
-	    {
-	        // Turn on the flash
-	        if (flashModes.contains(Parameters.FLASH_MODE_TORCH)) 
-	        {
-	          parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);
-	          mCamera.setParameters(parameters);
-	          // start preview with new settings
-	          try {
-	        	  mCamera.setDisplayOrientation(90);
-	              mCamera.setPreviewDisplay(mHolder);
-	              mCamera.startPreview();
+        try {
+      	  mCamera.setDisplayOrientation(90);
+            mCamera.setPreviewDisplay(mHolder);
+            mCamera.startPreview();
 
-	          } catch (Exception e){
-	              Log.d(TAG, "Error starting camera preview: " + e.getMessage());
-	          }
-	          Log.d(TAG, "Turn On Flashlight");
-	        } 
-	        else 
-	        {
-
-	        }
-	    }
+        } catch (Exception e){
+            Log.d(TAG, "Error starting camera preview: " + e.getMessage());
+        }
 
     }
 }
